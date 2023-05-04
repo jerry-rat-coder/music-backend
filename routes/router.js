@@ -110,7 +110,6 @@ function mergeSinger(singer) {
 
 router.get('/getRecommend', (req, res) => {
     // 第三方服务接口 url
-    // console.log('node后端启动', res);
     const url = 'https://u.y.qq.com/cgi-bin/musics.fcg'
 
     // 构造请求 data 参数
@@ -292,7 +291,6 @@ router.get('/getSingerList', (req, res) => {
 
 
 router.get('/getSingerDetail', (req, res) => {
-    // console.log(req.query.mid)
     const url = 'https://u.y.qq.com/cgi-bin/musics.fcg'
 
     const data = JSON.stringify({
@@ -312,14 +310,11 @@ router.get('/getSingerDetail', (req, res) => {
         '-': randomKey,
         data
     }).then((response) => {
-        // console.log('response', response)
         const data = response.data
-            // console.log(data.singerSongList.data.songList)
         if (data.code === ERR_OK) {
             const list = data.singerSongList.data.songList
                 // 歌单详情、榜单详情接口都有类似处理逻辑，固封装成函数
             const songList = handleSongList(list)
-                // console.log('list', songList)
             res.json({
                 code: ERR_OK,
                 result: {
@@ -347,7 +342,6 @@ router.get('/getSongsUrl', (req, res) => {
         } else {
             midGroup = [mid]
         }
-        // console.log('mid', mid)
         // 以歌曲的 mid 为 key，存储歌曲 URL
         const urlMap = {}
 
@@ -378,16 +372,11 @@ router.get('/getSongsUrl', (req, res) => {
             const sign = getSecuritySign(JSON.stringify(data))
             const ran = getRandomVal();
             const url = `https://u.y.qq.com/cgi-bin/musics.fcg?_=${getRandomVal()}&sign=${sign}`
-            console.log('uid', data.req_0.param.guid)
                 // 发送 post 请求
             return post(url, data).then((response) => {
-                console.log(response)
                 const data = response.data
-                    // console.log(data)
                 if (data.code === ERR_OK) {
-                    // console.log(data)
                     const midInfo = data.req_0.data.midurlinfo
-                    console.log('恭喜', data.req_0.data.midurlinfo)
                     const sip = data.req_0.data.sip
                     const domain = sip[sip.length - 1]
                     midInfo.forEach((info) => {
