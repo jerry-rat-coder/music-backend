@@ -1,2 +1,10 @@
 # music-backend
-后台接口
+vue-music后台接口
+
+启动
+
+```
+npm i
+npm start
+```
+
