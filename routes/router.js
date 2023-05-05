@@ -357,7 +357,7 @@ router.get('/getSongsUrl', (req, res) => {
                         songtype: new Array(mid.length).fill(0),
                         uin: '0',
                         loginflag: 0,
-                        platform: '20',
+                        platform: '23',
                         h5to: 'speed'
                     }
                 },
