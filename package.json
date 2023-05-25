@@ -21,6 +21,7 @@
         "node-pre-gyp-github": "^1.4.4",
         "pinyin": "^2.9.1",
         "qs": "^6.11.1",
+        "uglify-js": "^3.17.4",
         "vercel": "^29.1.1"
     },
     "devDependencies": {
