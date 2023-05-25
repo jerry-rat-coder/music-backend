@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var toolRouter = require('./routes/router');
+// let loginRouter = require('./routes/loginRouter')
 const axios = require('axios')
 const pinyin = require('pinyin')
 const Base64 = require('js-base64').Base64
@@ -112,6 +113,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', usersRouter);
 app.use('/api', toolRouter);
+// app.use('/loginApi', loginRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));
@@ -127,5 +129,5 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
-
+process.env.PORT = 3000;
 module.exports = app;
