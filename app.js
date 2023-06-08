@@ -8,7 +8,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var toolRouter = require('./routes/router');
-// let loginRouter = require('./routes/loginRouter')
+var wyyRouter = require('./routes/wyy')
+    // let loginRouter = require('./routes/loginRouter')
 const axios = require('axios')
 const pinyin = require('pinyin')
 const Base64 = require('js-base64').Base64
@@ -105,6 +106,8 @@ app.use(cors());
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'jade');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -114,8 +117,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', usersRouter);
 app.use('/api', toolRouter);
-// app.use('/loginApi', loginRouter);
-// catch 404 and forward to error handler
+app.use('/wyy', wyyRouter)
+    // app.use('/loginApi', loginRouter);
+    // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));
 });

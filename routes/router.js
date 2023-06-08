@@ -108,6 +108,7 @@ function mergeSinger(singer) {
 
 
 
+
 router.get('/getRecommend', (req, res) => {
     // 第三方服务接口 url
     const url = 'https://u.y.qq.com/cgi-bin/musics.fcg'
@@ -574,7 +575,8 @@ router.get('/getHotKeys', (req, res) => {
         const url = 'https://c.y.qq.com/splcloud/fcgi-bin/gethotkey.fcg'
 
         get(url, {
-            g_tk_new_20200303: token
+            g_tk_new_20200303: token,
+            sign
         }).then((response) => {
             const data = response.data
             if (data.code === ERR_OK) {
@@ -619,7 +621,8 @@ router.get('/search', (req, res) => {
         uin: '0',
         needNewCode: 1,
         platform: 'h5',
-        format: 'json'
+        format: 'json',
+        sign
     }
 
     get(url, data).then((response) => {
