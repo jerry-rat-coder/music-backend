@@ -19,7 +19,7 @@ router.get('/personalized', createProxyMiddleware({
         proxyReq.setHeader('Content-Type', 'application/json');
     },
     pathRewrite: (path, req) => {
-        return path + '?limit=30'
+        return path + `?limit=${req.query.limit}`
     }
 }))
 router.get('/top/artists', createProxyMiddleware({
@@ -39,7 +39,7 @@ router.get('/artist/songs', createProxyMiddleware({
         proxyReq.setHeader('Content-Type', 'application/json');
     },
     pathRewrite: (path, req) => {
-        return path + '?id=${id}&limit=100'
+        return path + `?id=${id}&limit=100`
     }
 }))
 module.exports = router
