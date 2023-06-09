@@ -12,4 +12,8 @@ router.get('/banner', createProxyMiddleware({
     //     '^/banner': '/banner', // rewrite path
     // },
 }))
+router.get('/personalized', createProxyMiddleware({
+    target: 'http://cloud-music.pl-fe.cn/personalized?limit=30', // target host
+    changeOrigin: true,
+}))
 module.exports = router
