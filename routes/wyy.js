@@ -19,24 +19,32 @@ router.get('/personalized', (req, res) => {
         url: `http://cloud-music.pl-fe.cn/personalized?limit=${req.query.limit}`
     }).pipe(res);
 })
-router.get('/top/artists', createProxyMiddleware({
-    target: 'http://cloud-music.pl-fe.cn/top/artists', // target host
-    changeOrigin: true,
-    onProxyReq: function(proxyReq, req, res) {
-        proxyReq.setHeader('Content-Type', 'application/json');
-    },
-    pathRewrite: (path, req) => {
-        return path + '?limit=100'
-    }
-}))
-router.get('/artist/songs', createProxyMiddleware({
-    target: 'http://cloud-music.pl-fe.cn/artist/songs', // target host
-    changeOrigin: true,
-    onProxyReq: function(proxyReq, req, res) {
-        proxyReq.setHeader('Content-Type', 'application/json');
-    },
-    pathRewrite: (path, req) => {
-        return path + `?id=${id}&limit=100`
-    }
-}))
+router.get('/top/artists', (req, res) => {
+    request({
+        url: `http://cloud-music.pl-fe.cn/top/artists?limit=${req.query.limit}`
+    }).pipe(res);
+})
+router.get('/artist/songs', (req, res) => {
+        request({
+            url: `http://cloud-music.pl-fe.cn/artist/songs?id=${req.query.id}&limit=${req.query.limit}`
+        }).pipe(res);
+    })
+    // `/song/detail?ids=${id}`
+router.get('/song/detail', (req, res) => {
+        request({
+            url: `http://cloud-music.pl-fe.cn/song/detail?ids=${req.query.id}`
+        }).pipe(res);
+    })
+    // `/song/url?id=${id}&br=320000`
+router.get('/song/url', (req, res) => {
+        request({
+            url: `https://service-f23fl8wz-1318570863.bj.apigw.tencentcs.com/release/song/url?id=${req.query.id}&br=320000`
+        }).pipe(res);
+    })
+    // `/lyric?id=${id}`
+router.get('/lyric', (req, res) => {
+    request({
+        url: `http://cloud-music.pl-fe.cn/lyric?id=${req.query.id}`
+    }).pipe(res);
+})
 module.exports = router
