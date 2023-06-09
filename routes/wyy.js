@@ -13,7 +13,7 @@ router.get('/banner', createProxyMiddleware({
     // },
 }))
 router.get('/personalized', createProxyMiddleware({
-    target: 'http://cloud-music.pl-fe.cn/personalized?limit=30', // target host
+    target: 'http://cloud-music.pl-fe.cn/personalized', // target host
     changeOrigin: true,
     onProxyReq: function(proxyReq, req, res) {
         proxyReq.setHeader('Content-Type', 'application/json');
