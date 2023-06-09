@@ -17,6 +17,19 @@ router.get('/personalized', createProxyMiddleware({
     changeOrigin: true,
     onProxyReq: function(proxyReq, req, res) {
         proxyReq.setHeader('Content-Type', 'application/json');
+    },
+    pathRewrite: (path, req) => {
+        return path + '?limit=100'
+    }
+}))
+router.get('/top/artists', createProxyMiddleware({
+    target: 'http://cloud-music.pl-fe.cn/top/artists', // target host
+    changeOrigin: true,
+    onProxyReq: function(proxyReq, req, res) {
+        proxyReq.setHeader('Content-Type', 'application/json');
+    },
+    pathRewrite: (path, req) => {
+        return path + '?limit=100'
     }
 }))
 module.exports = router
